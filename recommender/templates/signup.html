@@ -1,0 +1,121 @@
+{% extends "base.html" %} {% load static %}
+<title> {% block title %} Sign Up {% endblock %} </title>
+
+{% block content %}
+
+<div class="row justify-content-center">
+     <div class="col-lg-10">
+          <div class="card shadow-lg border-0 overflow-hidden">
+               <div class="row">
+                    <div class="col-md-6 position-relative" style="background: url('/static/images/signup_c.png') center center/cover no-repeat;">
+                         <div class="w-100 h-100 start-0 top-0 position-absolute" style="background:linear-gradient(175deg, rgba(0,0,0,.15),rgba(0,0,0,.5))">
+
+                         </div>
+
+                         <div class="position-absolute  bottom-0 start-20 text-white text-center p-4" style="background-color: rgba(0, 0, 0, 0.5); border-radius: 10px;">
+                              <h4 class="fw-bold mb-3">Hesabınızı Oluşturun</h4>
+                              <p>Toprak ve hava durumu parametrelerini girerek anında, makine öğrenimi destekli temiz bir kullanıcı arayüzü, güvenli hesaplar ve ayrıntılı geçmiş bilgilerine tek bir yerden ulaşın.</p>
+                              <ul class="list-unstyled text-start ms-3">
+                                   <li class="mb-2"><i class="fa-solid fa-circle-check me-2"></i>Güvenli ve Gizli</li>
+                                   <li class="mb-2"><i class="fa-solid fa-circle-check me-2"></i>Hızlı ve Doğru</li>
+                                   <li class="mb-2"><i class="fa-solid fa-circle-check me-2"></i>Modern ve şık</li>
+                              </ul>
+                         </div>
+                    </div>
+                    <div class="col-md-6 bg-white">
+                         <div class="p-5">
+                              <h3 class="mb-3"><i class="fa-solid fa-user-plus"></i> Hesap Oluştur</h3>
+                              <form action="" method="post" id="signupForm">
+                                   {% csrf_token %}
+                                   <div class="row g-3">
+                                        <div class="col-md-12">
+                                             <label for="fullname" class="form-label">
+                                                  Tam Ad
+                                             </label>
+                                             <div class="input-group">
+                                                  <span class="input-group-text"><i class="fa-regular fa-user"></i></span>
+                                                  <input type="text" name="fullname" class="form-control" placeholder="Deneme" required>
+                                             </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                             <label for="phone_number" class="form-label">
+                                                  Telefon Numarası
+                                             </label>
+                                             <div class="input-group">
+                                                  <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
+                                                  <input type="text" name="phone_number" class="form-control" placeholder="+90 555 555 55 55" required>
+                                             </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="col-md-12">
+                                             <label for="" class="form-label">
+                                                  Email Adresi
+                                             </label>
+                                             <div class="input-group">
+                                                  <span class="input-group-text"><i class="fa-regular fa-envelope"></i></span>
+                                                  <input type="email" name="email" class="form-control" placeholder="B4T6A@example.com" required>
+                                             </div>
+                                        </div>
+                                        
+                                        <div class="col-md-12">
+                                             <label for="" class="form-label">
+                                                  Parola
+                                             </label>
+                                             <div class="input-group">
+                                                  <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                                                  <input type="password" name="password" class="form-control" id="pwd1" placeholder="Parola" required>
+                                                  <button class="btn btn-outline-third" type="button" id="togglePwd1" title="Show/Hide">
+                                                       <i class="fa-regular fa-eye"></i>
+                                                  </button>
+                                             </div>
+                                        </div>
+                                        
+                                        <div class="col-md-12">
+                                             <label for="" class="form-label">
+                                                  Parola (Tekrar)
+                                             </label>
+                                             <div class="input-group">
+                                                  <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                                                  <input type="password" name="password_confirm" class="form-control" placeholder="Parola (Tekrar)" required id="pwd2">
+                                                  <button class="btn btn-outline-third" type="button" id="togglePwd2" title="Show/Hide">
+                                                       <i class="fa-regular fa-eye-slash"></i>
+                                                  </button>
+                                             </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                             <div class="form-check">
+                                                  <input type="checkbox" class="form-check-input" id="agree">
+                                                  <label class="form-check-label" for="agree">
+                                                       <small><a href="">Kullanım Koşullarını ve Gizlilik Politikasını</a> okudum ve kabul ediyorum.</small>
+                                                  </label>
+                                             </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                             <button type="submit" id="signupBtn" class="btn btn-success w-100">
+                                                  <i class="fa-solid fa-user-plus"></i> Onayla
+                                             </button>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                             <p class="text-center mb-0">
+                                                  Zaten hesabınız var mı? <a class="text-success  text-decoration-none ms-2" href="{% url 'signin' %}" style="">Giriş Yap</a>
+                                             </p>
+                                        </div>
+
+                                   </div>
+                                   
+                              </form>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+     <div>
+
+     </div>
+</div>
+
+{% endblock %}

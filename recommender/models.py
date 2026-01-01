@@ -14,9 +14,9 @@ class UserProfile(models.Model):
 
 class Prediction(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="predictions")
-    nitrogen = models.FloatField()
-    phosphorus = models.FloatField()
-    potassium = models.FloatField()
+    N = models.FloatField()
+    P = models.FloatField()
+    K = models.FloatField()
     temperature = models.FloatField()
     humidity = models.FloatField()
     ph = models.FloatField()

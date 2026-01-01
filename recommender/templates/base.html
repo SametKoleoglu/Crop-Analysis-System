@@ -34,17 +34,17 @@
             {% if user.is_authenticated and not user.is_staff %}
             
             <li class="nav-item">
-              <a class="nav-link active" href="#"
-                ><i class="fa-solid fa-flask"></i> Prediction</a
+              <a class="nav-link {% if request.resolver_match.view_name == 'prediction' %}active{% endif %}" href="{% url 'prediction' %}"
+                ><i class="fa-solid fa-flask"></i> Tahmin</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"
+              <a class="nav-link {% if request.resolver_match.view_name == 'history' %}active{% endif %}" href="{% url 'history' %}"
                 ><i class="fa-solid fa-clock-rotate-left"></i> History</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"
+              <a class="nav-link {% if request.resolver_match.view_name == 'profile' %}active{% endif %}" href="{% url 'profile' %}"
                 ><i class="fa-solid fa-user"></i> Profile</a
               >
             </li>
@@ -54,7 +54,7 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"
+              <a class="nav-link" href="{% url 'signout' %}"
                 ><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a
               >
             </li>
@@ -83,17 +83,17 @@
              
              {% else %}
             <li class="nav-item">
-              <a class="nav-link active" href="#"
+              <a class="nav-link active" href="{% url 'home' %}"
                 ><i class="fa-solid fa-home"></i> Home</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"
+              <a class="nav-link" href="{% url 'signin' %}"
                 ><i class="fa-solid fa-right-to-bracket"></i> Sign In</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"
+              <a class="nav-link" href="{% url 'signup' %}"
                 ><i class="fa-solid fa-user-plus"></i> Sign Up</a
               >
             </li>
@@ -116,5 +116,20 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+
+    {% if messages %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      {% for message in messages %}
+      Swal.fire({
+        icon: "{% if message.tags == 'error' %}error{% elif message.tags == 'success' %}success{% else %}info{% endif %}",
+        title: "{{ message }}",
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      });
+      {% endfor %}
+    </script>
+    {% endif %}
   </body>
 </html>

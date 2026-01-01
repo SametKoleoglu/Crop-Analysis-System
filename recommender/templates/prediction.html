@@ -1,0 +1,109 @@
+{% extends "base.html" %} {% load static %}
+<title>{% block title %} Prediction {% endblock %}</title>
+
+{% block content %}
+<div class="row g-3">
+  <div class="col-lg-9">
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3 class="card-title mb-0 fw-bold text-center">Ürün Önerisi</h3>
+          <div class="d-none d-md-block text-muted small">
+            <i class="fa-solid fa-circle-info"></i>
+            Sayısal değerleri girerek size en uygun ürünü
+            önerelim.(Humidity(0-100): Nem, PH(0-14): Toprak pH değeri)
+          </div>
+        </div>
+        <hr />
+
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="row g-3">
+            {% for c in feature_order %}
+
+            <div class="col-md-4">
+              <label for="{{ c }}" class="form-label fw-semibold text-uppercase"
+                >{{ c }}</label
+              >
+              {% if c == "humidity" %}
+              <input
+                type="number"
+                min="0"
+                max="100"
+                step="any"
+                name="{{c}}"
+                class="form-control"
+                required
+              />
+              {% elif c == "ph" %}
+              <input
+                type="number"
+                min="0"
+                max="14"
+                step="any"
+                name="{{c}}"
+                class="form-control"
+                required
+              />
+              {% else %}
+              <input
+                type="number"
+                min="0"
+                step="any"
+                class="form-control"
+                name="{{ c }}"
+                required
+              />
+              {% endif %}
+            </div>
+
+            {% endfor %}
+          </div>
+
+          <div class="d-flex flex-wrap gap-3 mt-3">
+            <button
+              type="submit"
+              class="btn btn-info btn-lg text-white w-auto fw-semibold"
+            >
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Öneri Al
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary btn-lg w-auto fw-semibold"
+            >
+              <i class="fa-solid fa-bolt"></i> Örnek Kullanın
+            </button>
+            <button
+              type="reset"
+              class="btn btn-outline-danger btn-lg w-auto fw-semibold"
+            >
+              <i class="fa-solid fa-bolt"></i> Sıfırla
+            </button>
+          </div>
+        </form>
+
+        {% if result %}
+        <hr>
+        <div class="alert alert-success">
+          Önerilen Ürün: <strong>{{ result|title }}</strong>
+        </div>
+
+        {% endif %}
+
+        {% if last_data %}
+        
+        <div class="d-flex justify-content-between align-items-center text-muted mb-2">
+          <i class="fa-regular fa-clock"></i>Kullanılan Girdi ->
+
+          {% for key, value in last_data.items %}
+          <code>{{ key }}: {{ value }}</code> {% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </div>
+
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3"></div>
+</div>
+{% endblock %}

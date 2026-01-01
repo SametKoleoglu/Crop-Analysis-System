@@ -1,17 +1,82 @@
-
-{% extends "base.html"%}
-{% load static %}
-
-{% block title %} Home {% endblock %}
-
+{% extends "base.html"%} {% load static %} {% block title %} Home {% endblock %}
 {% block content %}
 
-<section class="hero-gradient rounded-5">
-     <div>
-          <div>
-               <h1 class="display-5 fw-bold"><i class="fas fa-home"></i>Crop Recommendation System</h1>
+<section class="hero-gradient rounded-5 p-5 text-center text-white mb-5">
+  <div class="row align-items-center">
+    <div class="col-lg-8 mx-auto">
+      <h1 class="display-5 fw-bold mb-3">
+        <i class="fas fa-home"></i>Akıllı Toprak Analizi ve Öneri Sistemi
+      </h1>
+      <p class="lead text-white-100 mb-3">
+        Toprak ve hava durumu parametrelerini girerek anında, makine öğrenimi
+        destekli temiz bir kullanıcı arayüzü, güvenli hesaplar ve ayrıntılı
+        geçmiş bilgilerine tek bir yerden ulaşın.
+      </p>
+      <div class="d-flex gap-3 justify-content-center flex-wrap">
+        {% if user.is_authenticated and user.is_staff %}
+        <a href="" class="btn btn-light">
+          <i class="fa-solid fa-gauge"></i>
+          Yönetici Paneli</a
+        >
+        <a href="" class="btn btn-outline-light">
+          <i class="fa-solid fa-table"></i>
+          Tahminleri Göster</a
+        >
+        {% elif user.is_authenticated and not user.is_staff%}
+        <a href="{% url 'prediction' %}" class="btn btn-outline-light">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          Tahmin Et</a
+        >
+        <a href="{% url 'history' %}" class="btn btn-light">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          Tahminlerim</a
+        >
+        {% else %}
+        <a href="" class="btn btn-outline-light">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          Kullanıcı Girişi</a
+        >
+        <a href="" class="btn btn-outline-light">
+          <i class="fa-solid fa-user-plus"></i>
+          Hesap Oluştur</a
+        >
+        <a href="" class="btn btn-outline-light">
+          <i class="fa-solid fa-lock"></i>
+          Admin Girişi</a
+        >
+        {% endif %}
+      </div>
+
+      <div class="mt-3 small text-white-100">
+          <i class="fa-solid fa-shield-halved me-2"></i> Tahminleriniz güvende ve gizlidir.
+      </div>
+    </div>
+    <div class="col-lg-5 mt-5 mx-auto">
+     <img src="{% static 'images/image.png' %}" alt="" style="max-height:300px" class="img-fluid rounded-5 shadow-xl">
+    </div>
+  </div>
+  <div class="row g-4 mt-5 text-center text-white-100 align-items-center justify-content-center">
+     <div class="col-sm-6 col-lg-3">
+          <div class="stat-tile">
+               <div class="state-title">
+                    Kullanıcılar
+               </div>
+               <div>
+                    <span class="state-value">5</span>   
+               </div>
           </div>
      </div>
+     <div class="col-sm-6 col-lg-3">
+          <div class="stat-tile">
+               <div class="state-title">
+                    Tahminler
+               </div>
+               <div>
+                    <span class="state-value">5</span>   
+               </div>
+          </div>
+     </div>
+  </div>
 </section>
 
 {% endblock %}
